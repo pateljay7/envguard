@@ -1,5 +1,5 @@
 {
-  "name": "env-guardian",
+  "name": "env-guardian-checker",
   "version": "1.0.0",
   "description": "A CLI + library tool to validate and manage environment variables in Node.js projects",
   "main": "dist/index.js",
@@ -64,7 +64,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pateljay7/env-guardian.git"
+    "url": "git+https://github.com/pateljay7/env-guardian.git"
   },
   "bugs": {
     "url": "https://github.com/pateljay7/env-guardian/issues"
