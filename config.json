@@ -1,0 +1,57 @@
+{
+  "paths": [
+    "src/**/*.{js,ts,mjs,cjs,jsx,tsx}",
+    "lib/**/*.{js,ts,mjs,cjs,jsx,tsx}",
+    "app/**/*.{js,ts,mjs,cjs,jsx,tsx}",
+    "pages/**/*.{js,ts,mjs,cjs,jsx,tsx}",
+    "components/**/*.{js,ts,mjs,cjs,jsx,tsx}",
+    "utils/**/*.{js,ts,mjs,cjs,jsx,tsx}",
+    "config/**/*.{js,ts,mjs,cjs,jsx,tsx}",
+    "*.{js,ts,mjs,cjs,jsx,tsx}",
+    "example-app.js",
+    "simple-app.js"
+  ],
+  "envFiles": [
+    ".env",
+    ".env.development",
+    ".env.production", 
+    ".env.staging",
+    ".env.test",
+    ".env.local"
+  ],
+  "allowOptional": [
+    "DEBUG_MODE",
+    "LOG_LEVEL", 
+    "PORT",
+    "NODE_OPTIONS",
+    "VERBOSE",
+    "TIMEOUT",
+    "HOT_RELOAD",
+    "DEV_TOOLS",
+    "ANALYTICS_ID",
+    "SENTRY_DSN",
+    "ENABLE_CACHE",
+    "MAX_CONNECTIONS",
+    "SSL_ENABLED"
+  ],
+  "ignoreKeys": [
+    "NODE_ENV",
+    "npm_config_user_agent",
+    "npm_lifecycle_event", 
+    "npm_package_name",
+    "npm_package_version",
+    "CI",
+    "HOME",
+    "PATH",
+    "PWD", 
+    "SHELL",
+    "USER",
+    "TERM",
+    "LANG",
+    "LC_ALL",
+    "TMPDIR",
+    "EDITOR",
+    "PAGER"
+  ],
+  "reportFormat": "table"
+}

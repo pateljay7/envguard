@@ -1,0 +1,7 @@
+{
+  "paths": ["example-app.js", "src/**/*.{js,ts}"],
+  "envFiles": [".env"],
+  "allowOptional": ["LOG_LEVEL", "DEBUG_MODE"],
+  "ignoreKeys": ["NODE_ENV"],
+  "reportFormat": "table"
+}

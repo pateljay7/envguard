@@ -1,0 +1,7 @@
+{
+  "paths": ["simple-app.js"],
+  "envFiles": [".env.simple"],
+  "allowOptional": ["PORT"],
+  "ignoreKeys": [],
+  "reportFormat": "table"
+}
