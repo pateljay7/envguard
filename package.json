@@ -1,6 +1,6 @@
 {
   "name": "envguard-lint",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI + library tool to validate and manage environment variables in Node.js projects",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -31,6 +31,8 @@
   },
   "keywords": [
     "environment",
+    "lint",
+    "linter",
     "env",
     "dotenv",
     "validation",
