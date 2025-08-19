@@ -7,8 +7,8 @@ import { diffCommand } from './commands/diff.js';
 const program = new Command();
 
 program
-  .name('env-guardian')
-  .description('Environment Guardian - Validate and manage environment variables in Node.js projects')
+  .name('envguard')
+  .description('EnvGuard - Validate and manage environment variables in Node.js projects')
   .version('1.0.0');
 
 // Check command

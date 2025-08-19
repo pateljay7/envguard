@@ -15,8 +15,8 @@ const DEFAULT_CONFIG: Config = {
 export function loadConfig(configPath?: string): Config {
   let config = { ...DEFAULT_CONFIG };
 
-  // Try to load from .envguardianrc.json
-  const rcPath = configPath || '.envguardianrc.json';
+  // Try to load from .envguardrc.json
+  const rcPath = configPath || '.envguardrc.json';
   if (fs.existsSync(rcPath)) {
     try {
       const fileConfig = JSON.parse(fs.readFileSync(rcPath, 'utf-8'));
@@ -31,8 +31,8 @@ export function loadConfig(configPath?: string): Config {
   if (fs.existsSync(packageJsonPath)) {
     try {
       const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
-      if (packageJson['env-guardian']) {
-        config = mergeConfig(config, packageJson['env-guardian']);
+      if (packageJson['envguard']) {
+        config = mergeConfig(config, packageJson['envguard']);
       }
     } catch (error) {
       console.warn(`Warning: Failed to parse package.json`);

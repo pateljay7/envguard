@@ -1,12 +1,12 @@
 {
-  "name": "env-guardian-checker",
+  "name": "envguard",
   "version": "1.0.0",
   "description": "A CLI + library tool to validate and manage environment variables in Node.js projects",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "bin": {
-    "env-guardian": "dist/cli/index.js"
+    "envguard": "dist/cli/index.js"
   },
   "exports": {
     ".": {
@@ -64,10 +64,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pateljay7/env-guardian.git"
+    "url": "git+https://github.com/pateljay7/envguard.git"
   },
   "bugs": {
-    "url": "https://github.com/pateljay7/env-guardian/issues"
+    "url": "https://github.com/pateljay7/envguard/issues"
   },
-  "homepage": "https://github.com/pateljay7/env-guardian#readme"
+  "homepage": "https://github.com/pateljay7/envguard#readme"
 }

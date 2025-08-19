@@ -1,13 +1,13 @@
-# Contributing to Universal Environment Checker
+# Contributing to EnvGuard
 
-Thank you for your interest in contributing to Universal Environment Checker! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to EnvGuard! This document provides guidelines and information for contributors.
 
 ## Development Setup
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/pateljay7/env-guardian.git
-cd env-guardian
+git clone https://github.com/pateljay7/envguard.git
+cd envguard
 ```
 
 2. **Install dependencies:**
@@ -27,13 +27,13 @@ npm test
 
 5. **Test the CLI locally:**
 ```bash
-npx env-guardian check
+npx envguard check
 ```
 
 ## Project Structure
 
 ```
-env-guardian/
+envguard/
 ├── src/
 │   ├── cli/
 │   │   ├── index.ts          # CLI entry point
@@ -69,7 +69,7 @@ npm run lint
 5. **Build and test the CLI:**
 ```bash
 npm run build
-npx env-guardian check
+npx envguard check
 ```
 
 6. **Commit your changes:**
@@ -231,4 +231,4 @@ Contributors will be recognized in:
 - GitHub contributors page
 - Release notes for significant contributions
 
-Thank you for contributing to Universal Environment Checker! 🎉
+Thank you for contributing to EnvGuard! 🎉

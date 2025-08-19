@@ -12,7 +12,7 @@ import { validateEnvironment, getMissingKeyDetails, getUnusedKeyDetails } from '
 import { generateReport, generateEnvExample, generateDetailedReport } from './core/reporter.js';
 import { Config, ValidationResult, ReportOptions } from './types.js';
 
-export class EnvGuardian {
+export class EnvGuard {
   private config: Config;
 
   constructor(config?: Partial<Config>) {
@@ -78,7 +78,7 @@ export class EnvGuardian {
 
 // Convenience functions for direct usage
 export async function checkEnvironment(config?: Partial<Config>): Promise<ValidationResult> {
-  const checker = new EnvGuardian(config);
+  const checker = new EnvGuard(config);
   return checker.check();
 }
 
@@ -86,6 +86,6 @@ export async function generateEnvReport(
   config?: Partial<Config>,
   options?: Partial<ReportOptions>
 ): Promise<string> {
-  const checker = new EnvGuardian(config);
+  const checker = new EnvGuard(config);
   return checker.generateReport(options);
 }

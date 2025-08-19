@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { EnvGuardian } from '../../index.js';
+import { EnvGuard } from '../../index.js';
 import { loadConfig } from '../../config.js';
 import { parseEnvFile } from '../../core/parser.js';
 
@@ -21,7 +21,7 @@ export async function cleanCommand(options: CleanOptions): Promise<void> {
     }
 
     // Create checker instance
-    const checker = new EnvGuardian(config);
+    const checker = new EnvGuard(config);
 
     // Perform validation to find unused keys
     const result = await checker.check();

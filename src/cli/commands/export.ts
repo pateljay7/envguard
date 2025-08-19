@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { EnvGuardian } from '../../index.js';
+import { EnvGuard } from '../../index.js';
 import { loadConfig } from '../../config.js';
 
 interface ExportOptions {
@@ -19,7 +19,7 @@ export async function exportCommand(options: ExportOptions): Promise<void> {
     }
 
     // Create checker instance
-    const checker = new EnvGuardian(config);
+    const checker = new EnvGuard(config);
 
     // Generate .env.example content
     const exampleContent = await checker.generateEnvExample();

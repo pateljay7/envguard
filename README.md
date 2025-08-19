@@ -1,13 +1,40 @@
-# Environment Guardian
+# EnvGuard
 
-[![npm version](http# Install globally
-npm install -g env-guardian
+[![npm version](https://badge.f```bash
+# Install glob1. **Check your environment varia```bash
+# Basic check
+envguard check
+
+# Check specific env files
+envguard check --env .env.development .env.production
+
+# JSON output for CI/CD
+envguard check --json
+
+# Verbose output with detailed information
+envguard check --verbose
+
+# Use custom config file
+envguard check --config my-config.json
+```npx envguard check
+```
+
+2. **Generate a .env.example file:**
+```bash
+npx envguard export
+```
+
+3. **Compare different env files:**
+```bash
+npx envguard diff .env .env.production
+```ll -g envguard
 
 # Install as dev dependency
-npm install --save-dev env-guardian
+npm install --save-dev envguard
 
 # Use without installing
-npx env-guardian checke.fury.io/js/env-guardian.svg)](https://badge.fury.io/js/env-guardian)
+npx envguard check
+```envguard.svg)](https://badge.fury.io/js/envguard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A comprehensive CLI + library tool to validate and manage environment variables in Node.js projects. Ensures that all `process.env` keys used in code are present in `.env` files, identifies unused variables, and helps maintain clean environment configuration.
@@ -50,30 +77,30 @@ A comprehensive CLI + library tool to validate and manage environment variables 
 
 ```bash
 # Install globally
-npm install -g env-guardian
+npm install -g envguard
 
 # Install as dev dependency
-npm install --save-dev env-guardian
+npm install --save-dev envguard
 
 # Run without installing
-npx env-guardian check
+npx envguard check
 ```
 
 ## Quick Start
 
 1. **Check your environment variables:**
 ```bash
-npx env-guardian check
+npx envguard check
 ```
 
 2. **Generate a .env.example file:**
 ```bash
-npx env-guardian export
+npx envguard export
 ```
 
 3. **Compare environment files:**
 ```bash
-npx env-guardian diff .env .env.production
+npx envguard diff .env .env.production
 ```
 
 ## CLI Usage
@@ -84,19 +111,19 @@ Validate your environment variables against your codebase:
 
 ```bash
 # Basic check
-env-guardian check
+envguard check
 
 # Check with specific env files
-env-guardian check --env .env.development .env.production
+envguard check --env .env.development .env.production
 
 # JSON output for CI/CD
-env-guardian check --json
+envguard check --json
 
 # Verbose output with file locations
-env-guardian check --verbose
+envguard check --verbose
 
 # Use custom config
-env-guardian check --config my-config.json
+envguard check --config my-config.json
 ```
 
 **Exit Codes:**
@@ -110,13 +137,13 @@ Generate `.env.example` files from your codebase:
 
 ```bash
 # Generate .env.example
-env-guardian export
+envguard export
 
 # Custom output file
-env-guardian export --output .env.template
+envguard export --output .env.template
 
 # Include optional variables as comments
-env-guardian export --include-optional
+envguard export --include-optional
 ```
 
 ### Clean Command
@@ -125,13 +152,13 @@ Remove unused environment variables:
 
 ```bash
 # Preview what would be removed
-env-guardian clean --dry-run
+envguard clean --dry-run
 
 # Remove unused keys (with confirmation)
-env-guardian clean
+envguard clean
 
 # Force removal without confirmation
-env-guardian clean --force
+envguard clean --force
 ```
 
 ### Diff Command
@@ -140,15 +167,15 @@ Compare environment files:
 
 ```bash
 # Compare two files
-env-guardian diff .env .env.production
+envguard diff .env .env.production
 
 # JSON output
-env-guardian diff .env .env.production --json
+envguard diff .env .env.production --json
 ```
 
 ## Configuration
 
-Create a `.envguardianrc.json` file in your project root:
+Create a `.envguardrc.json` file in your project root:
 
 ```json
 {
@@ -164,7 +191,7 @@ Or add to your `package.json`:
 
 ```json
 {
-  "env-guardian": {
+  "envguard": {
     "paths": ["src/**/*.ts"],
     "envFiles": [".env"],
     "reportFormat": "json"
@@ -188,7 +215,7 @@ Or add to your `package.json`:
 Use as a Node.js library in your projects:
 
 ```javascript
-import { EnvGuardian, checkEnvironment } from 'env-guardian';
+import { EnvGuard, checkEnvironment } from 'envguard';
 
 // Quick check
 const result = await checkEnvironment({
@@ -266,7 +293,7 @@ jobs:
         with:
           node-version: '18'
       - run: npm ci
-      - run: npx env-guardian check --json
+      - run: npx envguard check --json
 ```
 
 ### Pre-commit Hook
@@ -275,7 +302,7 @@ jobs:
 {
   "husky": {
     "hooks": {
-      "pre-commit": "env-guardian check"
+      "pre-commit": "envguard check"
     }
   }
 }
@@ -286,9 +313,9 @@ jobs:
 ```json
 {
   "scripts": {
-    "env:check": "env-guardian check",
-    "env:generate": "env-guardian export",
-    "env:clean": "env-guardian clean --dry-run"
+    "env:check": "envguard check",
+    "env:generate": "envguard export",
+    "env:clean": "envguard clean --dry-run"
   }
 }
 ```
@@ -326,10 +353,10 @@ const token = process.env[prefix + 'TOKEN'];
 
 ```bash
 # Check against multiple environments
-env-guardian check --env .env .env.development .env.production
+envguard check --env .env .env.development .env.production
 
 # Compare environments
-env-guardian diff .env.development .env.production
+envguard diff .env.development .env.production
 ```
 
 ## Best Practices

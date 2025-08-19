@@ -1,4 +1,4 @@
-import { EnvGuardian } from '../../index.js';
+import { EnvGuard } from '../../index.js';
 import { loadConfig } from '../../config.js';
 import { ExitCode } from '../../types.js';
 
@@ -21,7 +21,7 @@ export async function checkCommand(options: CheckOptions): Promise<void> {
     }
 
     // Create checker instance
-    const checker = new EnvGuardian(config);
+    const checker = new EnvGuard(config);
 
     // Perform validation
     const result = await checker.check();
