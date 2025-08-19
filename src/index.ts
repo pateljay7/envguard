@@ -4,6 +4,7 @@ export * from './core/parser.js';
 export * from './core/scanner.js';
 export * from './core/validator.js';
 export * from './core/reporter.js';
+export * from './core/schema-validator.js';
 
 import { loadConfig } from './config.js';
 import { parseMultipleEnvFiles } from './core/parser.js';
@@ -89,3 +90,11 @@ export async function generateEnvReport(
   const checker = new EnvGuard(config);
   return checker.generateReport(options);
 }
+
+// Schema validation convenience functions
+export { 
+  validateEnv, 
+  generateExampleEnv, 
+  loadSchema,
+  SchemaValidator 
+} from './core/schema-validator.js';

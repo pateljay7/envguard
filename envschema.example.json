@@ -1,0 +1,101 @@
+{
+  "_comment": "Example EnvGuard schema - copy to .envschema.json and customize for your project",
+  
+  "NODE_ENV": {
+    "type": "enum",
+    "description": "Application environment mode",
+    "allowedValues": ["development", "production", "test"],
+    "default": "development",
+    "required": true
+  },
+  
+  "PORT": {
+    "type": "number",
+    "description": "Server port number",
+    "min": 1,
+    "max": 65535,
+    "default": 3000,
+    "required": false
+  },
+  
+  "DATABASE_URL": {
+    "type": "url",
+    "description": "Primary database connection URL",
+    "isSensitive": true,
+    "required": true
+  },
+  
+  "REDIS_URL": {
+    "type": "url", 
+    "description": "Redis cache connection URL",
+    "isSensitive": true,
+    "required": false
+  },
+  
+  "JWT_SECRET": {
+    "type": "string",
+    "description": "Secret key for JWT token signing",
+    "min": 32,
+    "isSensitive": true,
+    "required": true
+  },
+  
+  "API_KEY": {
+    "type": "string",
+    "description": "External API key (32 characters)",
+    "pattern": "^[a-zA-Z0-9]{32}$",
+    "isSensitive": true,
+    "required": true
+  },
+  
+  "DEBUG": {
+    "type": "boolean",
+    "description": "Enable debug mode for development",
+    "default": false,
+    "required": false
+  },
+  
+  "LOG_LEVEL": {
+    "type": "enum",
+    "description": "Application logging level",
+    "allowedValues": ["error", "warn", "info", "debug"],
+    "default": "info",
+    "required": false
+  },
+  
+  "ADMIN_EMAIL": {
+    "type": "email",
+    "description": "Administrator email address",
+    "required": true
+  },
+  
+  "MAX_CONNECTIONS": {
+    "type": "number",
+    "description": "Maximum database connections",
+    "min": 1,
+    "max": 100,
+    "default": 10,
+    "required": false
+  },
+  
+  "FEATURE_FLAGS": {
+    "type": "json",
+    "description": "Feature flags configuration object",
+    "required": false
+  },
+  
+  "UPLOAD_PATH": {
+    "type": "string",
+    "description": "File upload directory path",
+    "default": "./uploads",
+    "required": false
+  },
+  
+  "ENCRYPTION_KEY": {
+    "type": "string",
+    "description": "Data encryption key (must be exactly 64 hex characters)",
+    "pattern": "^[a-fA-F0-9]{64}$",
+    "isSensitive": true,
+    "required": true
+  }
+}
