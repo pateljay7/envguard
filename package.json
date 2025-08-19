@@ -1,5 +1,5 @@
 {
-  "name": "envguard",
+  "name": "envguard-lint",
   "version": "1.0.0",
   "description": "A CLI + library tool to validate and manage environment variables in Node.js projects",
   "main": "dist/index.js",
