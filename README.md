@@ -12,12 +12,14 @@ A comprehensive CLI + library tool that ensures all `process.env` keys used in y
 ## ✨ Features
 
 🔍 **Smart Code Scanning** - Detects env usage in multiple formats: `process.env.KEY`, `process.env["KEY"]`, dynamic access  
-🌍 **Multi-Environment Support** - Validate across `.env.dev`, `.env.prod`, and custom files  
+� **Schema-Based Validation** - Type-safe env vars with JSON schemas, patterns, and sensitive value protection  
+�🌍 **Multi-Environment Support** - Validate across `.env.dev`, `.env.prod`, and custom files  
 🧹 **Intelligent Cleanup** - Remove unused variables with confirmation prompts  
 📊 **Rich Output Formats** - Beautiful tables, JSON for CI/CD, minimal for scripts  
 ⚡ **Lightning Fast** - Scans large codebases in seconds with glob patterns  
 🔄 **Environment Diff** - Compare and sync variables across different env files  
 🛡️ **CI/CD Ready** - Proper exit codes and JSON output for automation  
+🔒 **Security Aware** - Automatic masking of sensitive values in all outputs  
 📦 **Zero Config** - Works out of the box, customize when needed
 
 ## 🚀 Quick Start
@@ -26,13 +28,17 @@ A comprehensive CLI + library tool that ensures all `process.env` keys used in y
 # Install
 npm install -D envguard
 
-# Validate your env files
+# Traditional validation (code scanning)
 npx envguard check
 
-# Generate .env.example
-npx envguard export
+# Schema-based validation (recommended)
+npx envguard init --template comprehensive
+npx envguard validate
 
-# Compare environments
+# Generate .env.example
+npx envguard generate
+
+# Compare environments  
 npx envguard diff .env .env.production
 ```
 
@@ -162,6 +168,116 @@ envguard diff .env .env.production
 envguard diff .env .env.production --json
 ```
 
+## 🎯 Schema-Based Validation
+
+EnvGuard supports comprehensive schema-based validation to ensure your environment variables meet specific requirements and types.
+
+### 📋 Schema Definition
+
+Create a `.envschema.json` file to define validation rules:
+
+```json
+{
+  "NODE_ENV": {
+    "type": "enum",
+    "description": "Application environment",
+    "allowedValues": ["development", "production", "test"],
+    "default": "development",
+    "required": true
+  },
+  "PORT": {
+    "type": "number",
+    "description": "Server port number",
+    "min": 1,
+    "max": 65535,
+    "default": 3000,
+    "required": false
+  },
+  "DATABASE_URL": {
+    "type": "url", 
+    "description": "Database connection URL",
+    "isSensitive": true,
+    "required": true
+  },
+  "API_KEY": {
+    "type": "string",
+    "description": "External API key", 
+    "pattern": "^[a-zA-Z0-9]{32}$",
+    "isSensitive": true,
+    "required": true
+  },
+  "DEBUG": {
+    "type": "boolean",
+    "description": "Enable debug logging",
+    "default": false,
+    "required": false
+  }
+}
+```
+
+### 🏗️ Schema Field Types
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | string | Data type: `string`, `number`, `boolean`, `url`, `email`, `enum`, `json` |
+| `required` | boolean | Whether the variable must exist (default: `true`) |
+| `default` | any | Fallback value if not provided (optional) |
+| `allowedValues` | array | Restrict value to a set of choices (for enums) |
+| `pattern` | regex | Regex pattern constraint (for strings) |
+| `min` / `max` | number | Min/max length (string) or value (number) |
+| `isSensitive` | boolean | If true, value is masked in reports and cannot have defaults |
+| `description` | string | Human-readable explanation |
+
+### 🛠️ Schema Commands
+
+```bash
+# Initialize a new schema
+envguard init --template comprehensive
+
+# Validate env against schema
+envguard validate --env .env
+
+# Generate .env.example from schema  
+envguard generate --output .env.example
+
+# Custom schema file
+envguard validate --schema custom-schema.json
+```
+
+### 📊 Schema Validation Output
+
+```bash
+📋 Schema Validation Report
+
+⚠️  Found 3 issues:
+
+Missing required variables:
+  ✗ DATABASE_URL
+  ✗ API_KEY
+
+Type validation errors:
+  ✗ PORT: Invalid number format
+    Server port number
+  ✗ DEBUG: Invalid boolean format
+    Enable debug logging
+
+Enum validation errors:
+  ✗ NODE_ENV: Not in allowed values: development, production, test
+    Application environment
+
+Summary:
+  Variables in schema: 5
+  Variables in env: 3  
+  Total issues: 3
+```
+
+### 🔒 Security Features
+
+- **Sensitive values** are automatically masked in all outputs (`********`)
+- **Sensitive fields** cannot have default values (must be explicitly provided)
+- **Pattern validation** ensures API keys match expected formats
+- **JSON output** maintains masking for CI/CD security
+
 ## ⚙️ Configuration
 
 Create a `.envguardrc.json` file in your project root:
@@ -238,6 +354,54 @@ const checker = new EnvGuard({
 const validationResult = await checker.check();
 const report = await checker.generateReport({ format: 'json' });
 const envExample = await checker.generateEnvExample();
+```
+
+### 🎯 Schema Validation API
+
+```javascript
+import { validateEnv, generateExampleEnv, SchemaValidator } from 'envguard';
+
+// Define your schema
+const schema = {
+  NODE_ENV: {
+    type: 'enum',
+    allowedValues: ['development', 'production', 'test'],
+    default: 'development'
+  },
+  PORT: {
+    type: 'number',
+    min: 1,
+    max: 65535,
+    default: 3000
+  },
+  API_KEY: {
+    type: 'string',
+    pattern: '^[a-zA-Z0-9]{32}$',
+    isSensitive: true,
+    required: true
+  }
+};
+
+// Validate and get typed environment
+const env = validateEnv(process.env, schema);
+console.log(env.PORT); // number type, with default applied
+
+// Generate .env.example
+const exampleContent = generateExampleEnv(schema);
+console.log(exampleContent);
+
+// Advanced validation with detailed results  
+const validator = new SchemaValidator(schema);
+const result = validator.validate(process.env);
+
+if (result.summary.totalIssues > 0) {
+  console.log('Missing:', result.missing);
+  console.log('Type errors:', result.invalidType);
+  console.log('Format errors:', result.invalidFormat);
+  process.exit(1);
+}
+
+const typedEnv = validator.getValidatedEnv(process.env);
 ```
 
 ## 📊 Example Output
